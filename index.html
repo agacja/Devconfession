@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sin Confession</title>
+</head>
+<body>
+    <h1>Confess Your Sin</h1>
+    <select id="sinSelect">
+        <option value="0">Lust for Endless Cryptocurrencies</option>
+        <option value="1">Gluttony of Smart Contracts</option>
+        <option value="2">Greed for Gas Fees</option>
+        <option value="3">Sloth in Blockchain Syncing</option>
+        <option value="4">Wrath Against Forks</option>
+        <option value="5">Envy of Ethereum's Success</option>
+        <option value="6">Pride in Decentralization</option>
+    </select>
+    <button onclick="confess()">Confess</button>
+
+    <script>
+        function confess() {
+            var sin = document.getElementById('sinSelect').value;
+            console.log('Selected sin:', sin); // Log the selected sin
+
+            fetch('/confess', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ sin: sin })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Response from server:', data); // Log the response from the server
+            })
+            .catch((error) => {
+                console.error('Error:', error); // Log any errors
+            });
+        }
+    </script>
+</body>
+</html>
