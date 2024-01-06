@@ -13,7 +13,7 @@ mod SinType {
 fn main(sins: [u32; 7]) {
     let mut total = 0;
     // Corresponding weights for each sin
-    let weights = [5, 1000, 3, 2, 1, 1, 1]; 
+    let weights = [5, 1, 10000, 2, 1, 1, 1]; 
 
     for i in 0..sins.len() {
         total += sins[i] * weights[i];

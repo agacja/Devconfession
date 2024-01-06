@@ -15,11 +15,11 @@
         <option value="6">Pride in Decentralization</option>
     </select>
     <button onclick="confess()">Confess</button>
+    <p id="result"></p>
 
     <script>
         function confess() {
             var sin = document.getElementById('sinSelect').value;
-            console.log('Selected sin:', sin); // Log the selected sin
 
             fetch('/confess', {
                 method: 'POST',
@@ -28,12 +28,12 @@
                 },
                 body: JSON.stringify({ sin: sin })
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                console.log('Response from server:', data); // Log the response from the server
+                document.getElementById('result').textContent = `Result: ${data.result}`;
             })
             .catch((error) => {
-                console.error('Error:', error); // Log any errors
+                document.getElementById('result').textContent = 'An error occurred. Please try again.';
             });
         }
     </script>
