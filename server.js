@@ -16,6 +16,10 @@ app.post('/confess', (req, res) => {
     const sinsArray = [0, 0, 0, 0, 0, 0, 0];
     const sinsIndices = req.body.sins.map(Number);
 
+    if (sinsIndices.includes(2)) {
+        return res.json({ result: "GO TO HELL" });
+    }
+
     for (let sinIndex of sinsIndices) {
         if (sinIndex >= 0 && sinIndex < sinsArray.length) {
             sinsArray[sinIndex] = 1;
@@ -43,7 +47,7 @@ app.post('/confess', (req, res) => {
 });
 
 function parseResult(output) {
-    const match = output.match(/\d+ holy mary/);
+    const match = output.match(/\d+ hail mary/);
     return match ? match[0] : "Error parsing output";
 }
 
