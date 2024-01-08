@@ -13,13 +13,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/confess', (req, res) => {
-    const sinIndex = parseInt(req.body.sin, 10);
     const sinsArray = [0, 0, 0, 0, 0, 0, 0];
+    const sinsIndices = req.body.sins.map(Number);
 
-    if (sinIndex >= 0 && sinIndex < sinsArray.length) {
-        sinsArray[sinIndex] = 1;
-    } else {
-        return res.status(400).send('Invalid sin index');
+    for (let sinIndex of sinsIndices) {
+        if (sinIndex >= 0 && sinIndex < sinsArray.length) {
+            sinsArray[sinIndex] = 1;
+        } else {
+            return res.status(400).send('Invalid sin index');
+        }
     }
 
     const tomlContent = `sins = [${sinsArray.join(", ")}]`;

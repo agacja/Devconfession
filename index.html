@@ -4,8 +4,8 @@
     <title>Sin Confession</title>
 </head>
 <body>
-    <h1>Confess Your Sin</h1>
-    <select id="sinSelect">
+    <h1>Confess Your Sins</h1>
+    <select id="sinSelect" multiple>
         <option value="0">Lust for Endless Cryptocurrencies</option>
         <option value="1">Gluttony of Smart Contracts</option>
         <option value="2">Greed for Gas Fees</option>
@@ -19,14 +19,15 @@
 
     <script>
         function confess() {
-            var sin = document.getElementById('sinSelect').value;
+            var selectedOptions = document.querySelectorAll('#sinSelect option:checked');
+            var sins = Array.from(selectedOptions).map(el => el.value);
 
             fetch('/confess', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ sin: sin })
+                body: JSON.stringify({ sins: sins })
             })
             .then(response => response.json())
             .then(data => {
